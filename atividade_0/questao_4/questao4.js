@@ -4,17 +4,20 @@ class Vector {
     }
 
     Norma() {
-        return Math.sqrt(Math.pow(this.vector[0], 2) + Math.pow(this.vector[1], 2) + Math.pow(this.vector[2], 2));
+        var soma = 0;
+
+        for (var i=0; i<3; i++) {
+            soma += Math.pow(this.vector[i], 2);
+        }
+
+        return Math.sqrt(soma);
     }
 
     static ProdutoVetorial(vector1, vector2) {
-        var product = [];
-
-        for (var i = 0; i < 3; i++) {
-            product.push(vector1.vector[i]*vector2.vector[i]);
-        }
-
-        return product;
+    
+        return [vector1.vector[1]*vector2.vector[2] - vector1.vector[2]*vector2.vector[1],
+                vector1.vector[2]*vector2.vector[0] - vector1.vector[0]*vector2.vector[2],
+                vector1.vector[0]*vector2.vector[1] - vector1.vector[1]*vector2.vector[0]];
     }
 
     static ProdutoEscalar(vector1, vector2) {
@@ -55,41 +58,51 @@ class Matriz {
              [this.matriz[0][2], this.matriz[1][2], this.matriz[2][2]]]
         )
     }
-}
 
-function ProdutoVetorMatriz(vector, matriz) {
-    var product = [];
-
-    for(var i=0; i<3; i++){
-        var product1 = 0;
-        for(var j=0; j<3; j++){
-            product1 += vector.vector[j]*matriz.matriz[j][i];
+    static ProdutoVetorMatriz(vector, matriz) {
+        var product = [];
+    
+        for(var i=0; i<3; i++){
+            var product1 = 0;
+            for(var j=0; j<3; j++){
+                product1 += vector.vector[j]*matriz.matriz[j][i];
+            }
+    
+            product.push(product1);
         }
-
-        product.push(product1);
+    
+        return product;
     }
 
-    return product;
-}
-
-function ProdutoMatrizMatriz(matriz1, matriz2) {
-    product = new Array(3);
-
-    for (var a = 0; a < 3; ++a) { // 3 - tamanho da matriz1
-        product[a] = new Array(3); 
-        for (var b = 0; b < 3; ++b) { // 3 - tamanho da matriz2
-            product[a][b] = 0;             
-          for (var i = 0; i < 3; ++i) { // 3 - tamanho da matriz1
-            product[a][b] += matriz1.matriz[a][i] * matriz2.matriz[i][b];
+    static ProdutoMatrizMatriz(matriz1, matriz2) {
+        var product = new Array(3);
+    
+        for (var a = 0; a < 3; ++a) { // 3 - tamanho da matriz1
+            product[a] = new Array(3); 
+            for (var b = 0; b < 3; ++b) { // 3 - tamanho da matriz2
+                product[a][b] = 0;             
+              for (var i = 0; i < 3; ++i) { // 3 - tamanho da matriz1
+                product[a][b] += matriz1.matriz[a][i] * matriz2.matriz[i][b];
+              }
+            }
           }
-        }
-      }
-
-    return product;
+    
+        return product;
+    }
 }
-
 
 var vectorTest1 = new Vector([1,2,3]);
 var vectorTest2 = new Vector([4,5,6]);
 
-var matrizTeste1 = new Matriz([[1,2,3], [4,5,6], [7,8,9]]);
+var matrizTeste1 = new Matriz([[1,2,5], [4,5,6], [7,8,9]]);
+var matrizTeste2 = new Matriz([[10,20,30], [40,50,60], [70,80,90]]);
+
+console.log(`Norma do vetor teste 1: ${vectorTest1.Norma()}`);
+console.log(`Produto vetorial entre os vetores testes 1 e 2: (${Vector.ProdutoVetorial(vectorTest1, vectorTest2)})`);
+console.log(`Produto escalar entre os vetores testes 1 e 2: ${Vector.ProdutoEscalar(vectorTest1, vectorTest2)}`);
+console.log(`Produto entre os vetorTeste1 e matrizTeste1: ${Matriz.ProdutoVetorMatriz(vectorTest1, matrizTeste1)}`);
+console.log("Produto entre os matrizTeste1 e matrizTeste2: ");
+console.log(Matriz.ProdutoMatrizMatriz(matrizTeste1, matrizTeste2));
+console.log(`Determinante da matrizTeste1: ${matrizTeste1.Determinante()}`);
+console.log("Transposta da matrizTeste1: ");
+console.log(matrizTeste1.Transposta());
