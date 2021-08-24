@@ -94,8 +94,8 @@ function ThreeCubes() {
     cubes[1].position.y = -0.3;
     cubes[2].position.y = 0.5;
 
-    const ambient_light = new THREE.AmbientLight(0x404040, 0.3); // soft white ambient light
-    const directional_light = new THREE.DirectionalLight(0xffffff, 1); // white directional light
+    const ambient_light = new THREE.AmbientLight(0x404040, 0.3);
+    const directional_light = new THREE.DirectionalLight(0xffffff, 1);
 
     directional_light.position.set(0, 2, 2);
     directional_light.castShadow = true;
@@ -145,8 +145,8 @@ function RotationThreeCubes() {
     cubes[1].position.y = -0.3;
     cubes[2].position.y = 0.5;
 
-    const ambient_light = new THREE.AmbientLight(0x404040, 0.3); // soft white ambient light
-    const directional_light = new THREE.DirectionalLight(0xffffff, 1); // white directional light
+    const ambient_light = new THREE.AmbientLight(0x404040, 0.3);
+    const directional_light = new THREE.DirectionalLight(0xffffff, 1);
 
     directional_light.position.set(0, 2, 2);
     directional_light.castShadow = true;
