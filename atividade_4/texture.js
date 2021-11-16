@@ -1,11 +1,13 @@
-$(document).ready(function(){
-    $('body').append($('<script src="images.js"></script>'));
-});
+/*
+    Para fazer cada comparação:
+    - Descomente a imagem correspondente
+    - Descomente cada trecho de configuracao de textura individualmente
+*/
 
 let image = new Image();
-image.src = src_gate; // textura do portão do Doom
+//image.src = src_gate; // textura do portão do Doom
 //image.src = src_colors; // texture do padrão xadrez colorido
-//image.src = src_checkerboard; // texture do padrão xadrez 
+image.src = src_checkerboard; // texture do padrão xadrez 
 
 texture = new THREE.Texture(image);
 
